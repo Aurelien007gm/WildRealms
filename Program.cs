@@ -1,9 +1,15 @@
+using WildRealms.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 var app = builder.Build();
+// Register DbContext with the connection string (adjust for your DB provider)
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

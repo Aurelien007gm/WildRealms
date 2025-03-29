@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "1tOEw9B2PrbTHdLMw1rHPQh59VKqHIctfNphxwnRrDE=",
+  "Hash": "aMooRo52Im9yECkiskFD0I2WAe+fOYqgaDCsZqGZw3M=",
   "Source": "WildRealms",
   "BasePath": "_content/WildRealms",
   "Mode": "Default",
@@ -99,6 +99,48 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\WildRealms\\WildRealms\\wwwroot\\js\\bcrypt.min.js",
+      "SourceId": "WildRealms",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\WildRealms\\WildRealms\\wwwroot\\",
+      "BasePath": "_content/WildRealms",
+      "RelativePath": "js/bcrypt.min#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "4pnoi727kx",
+      "Integrity": "+DvTnbX8IX9B/OH0xpo360buUVk+Jlc2viojUGq1fPQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\bcrypt.min.js"
+    },
+    {
+      "Identity": "D:\\WildRealms\\WildRealms\\wwwroot\\js\\CreateAccount.js",
+      "SourceId": "WildRealms",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\WildRealms\\WildRealms\\wwwroot\\",
+      "BasePath": "_content/WildRealms",
+      "RelativePath": "js/CreateAccount#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "vgmof616s8",
+      "Integrity": "v14CVDUR0aFaaKFK4VpcyjA/bcYWcBP4vKTxPn1Z7t0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\CreateAccount.js"
     },
     {
       "Identity": "D:\\WildRealms\\WildRealms\\wwwroot\\js\\site.js",
@@ -1481,6 +1523,170 @@
         {
           "Name": "integrity",
           "Value": "sha256-Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM="
+        }
+      ]
+    },
+    {
+      "Route": "js/bcrypt.min.4pnoi727kx.js",
+      "AssetFile": "D:\\WildRealms\\WildRealms\\wwwroot\\js\\bcrypt.min.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21683"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+DvTnbX8IX9B/OH0xpo360buUVk+Jlc2viojUGq1fPQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 29 Mar 2025 22:21:28 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "4pnoi727kx"
+        },
+        {
+          "Name": "label",
+          "Value": "js/bcrypt.min.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+DvTnbX8IX9B/OH0xpo360buUVk+Jlc2viojUGq1fPQ="
+        }
+      ]
+    },
+    {
+      "Route": "js/bcrypt.min.js",
+      "AssetFile": "D:\\WildRealms\\WildRealms\\wwwroot\\js\\bcrypt.min.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "21683"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"+DvTnbX8IX9B/OH0xpo360buUVk+Jlc2viojUGq1fPQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 29 Mar 2025 22:21:28 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-+DvTnbX8IX9B/OH0xpo360buUVk+Jlc2viojUGq1fPQ="
+        }
+      ]
+    },
+    {
+      "Route": "js/CreateAccount.js",
+      "AssetFile": "D:\\WildRealms\\WildRealms\\wwwroot\\js\\CreateAccount.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "919"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"v14CVDUR0aFaaKFK4VpcyjA/bcYWcBP4vKTxPn1Z7t0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 29 Mar 2025 22:32:28 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-v14CVDUR0aFaaKFK4VpcyjA/bcYWcBP4vKTxPn1Z7t0="
+        }
+      ]
+    },
+    {
+      "Route": "js/CreateAccount.vgmof616s8.js",
+      "AssetFile": "D:\\WildRealms\\WildRealms\\wwwroot\\js\\CreateAccount.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "919"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"v14CVDUR0aFaaKFK4VpcyjA/bcYWcBP4vKTxPn1Z7t0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sat, 29 Mar 2025 22:32:28 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "vgmof616s8"
+        },
+        {
+          "Name": "label",
+          "Value": "js/CreateAccount.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-v14CVDUR0aFaaKFK4VpcyjA/bcYWcBP4vKTxPn1Z7t0="
         }
       ]
     },
@@ -6263,7 +6469,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 29 Mar 2025 16:16:08 GMT"
+          "Value": "Sat, 29 Mar 2025 21:20:58 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6300,7 +6506,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 29 Mar 2025 16:16:08 GMT"
+          "Value": "Sat, 29 Mar 2025 21:20:58 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6345,7 +6551,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 29 Mar 2025 16:16:08 GMT"
+          "Value": "Sat, 29 Mar 2025 21:20:58 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -6390,7 +6596,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Sat, 29 Mar 2025 16:16:08 GMT"
+          "Value": "Sat, 29 Mar 2025 21:20:58 GMT"
         },
         {
           "Name": "Cache-Control",

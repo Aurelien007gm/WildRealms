@@ -13,6 +13,14 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "D:\\WildRealms\\WildRealms\\wwwroot\\js\\CreateAccount.js",
+      "PackagePath": "staticwebassets\\js\\CreateAccount.js"
+    },
+    {
+      "Id": "D:\\WildRealms\\WildRealms\\wwwroot\\js\\bcrypt.min.js",
+      "PackagePath": "staticwebassets\\js\\bcrypt.min.js"
+    },
+    {
       "Id": "D:\\WildRealms\\WildRealms\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
