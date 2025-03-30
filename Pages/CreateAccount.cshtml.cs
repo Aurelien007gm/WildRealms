@@ -23,25 +23,32 @@ namespace WildRealms.Pages
 
         public IActionResult OnPost()
         {
-            if (_context.Users.Any(u => u.Username == Username))
+
+            try {
+                if (_context.Users.Any(u => u.Username == Username))
+                {
+                    // If the username already exists, return an error
+                    ModelState.AddModelError("Username", "Un utilisateur avec ce login existe déja.");
+                    return Page();
+                }
+
+                var user = new User
+                {
+                    Username = Username,
+                    PasswordHash = PasswordHash // Save the hashed password
+                };
+
+                _context.Users.Add(user);
+                _context.SaveChanges();
+
+                // Redirect to a success page
+                return RedirectToPage("/AccountCreated", new { user = Username });
+            }catch
             {
-                // If the username already exists, return an error
-                return RedirectToPage("/AccountCreated", new { user = "Already existing lol" });
-                //ModelState.AddModelError("", "Username already exists.");
-                //return Page();
+                ModelState.AddModelError("", "Une erreur s'est produite.");
+                return Page();
             }
-
-            var user = new User
-            {
-                Username = Username,
-                PasswordHash = PasswordHash // Save the hashed password
-            };
-
-            _context.Users.Add(user);
-            _context.SaveChanges();
-
-            // Redirect to a success page
-            return RedirectToPage("/AccountCreated", new { user = Username });
+            
         }
     }
 

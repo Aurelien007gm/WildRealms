@@ -18,6 +18,16 @@
     </div>
 
     <button type="submit" class="btn btn-primary">Create Account</button>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger mt-2">
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <p>@error.ErrorMessage</p>
+            }
+        </div>
+    }
 </form>
 <script type="module" src="/js/createAccount.js"></script>
 
