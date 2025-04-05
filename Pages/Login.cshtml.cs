@@ -6,13 +6,14 @@ using WildRealms.Models;
 namespace WildRealms.Pages
 {
 
-    public class CreateAccountModel : PageModel
+    public class LoginModel : PageModel
     {
         private readonly ApplicationDbContext _context;
-
-        public CreateAccountModel(ApplicationDbContext context)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public LoginModel(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
+            _httpContextAccessor = httpContextAccessor; // Injection du HttpContextAccessor
         }
 
         [BindProperty]
@@ -35,23 +36,17 @@ namespace WildRealms.Pages
 
                 if (_context.Users.Any(u => u.Username == Username))
                 {
-                    // If the username already exists, return an error
-                    ModelState.AddModelError("Username", "Un utilisateur avec ce login existe déja.");
-                    return Page();
+                    if (PasswordHash == _context.Users.FirstOrDefault(u => u.Username == Username).PasswordHash)
+                    {
+                        HttpContext.Session.SetString("Username", Username);
+                        return RedirectToPage("/Dashboard", new { user = Username });
+                    }
                 }
+                ModelState.AddModelError("Username", "La connexion a echouer");
+                return Page();
 
-                var user = new User
-                {
-                    Username = Username,
-                    PasswordHash = PasswordHash // Save the hashed password
-                };
-
-                _context.Users.Add(user);
-                _context.SaveChanges();
-
-                // Redirect to a success page
-                return RedirectToPage("/AccountCreated", new { user = Username });
-            }catch
+            }
+            catch
             {
                 ModelState.AddModelError("", "Une erreur s'est produite.");
                 return Page();

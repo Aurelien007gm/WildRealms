@@ -6,7 +6,27 @@
 
 <h1>Hello World!</h1>
 <a href="/CreateAccount" class="btn btn-primary">Create Account</a>
+<a href="/Login" class="btn btn-primary">Login</a>
+    
+ <p id="status"></p>
+<button id="logoutBtn" style="display:none;" onclick="logout()">Se déconnecter</button>
 <script type="module" src="/dist/main.js"></script>
+<script>
+    function checkLoginStatus() {
+        let user = localStorage.getItem("user");
+        if (user) {
+            document.getElementById("status").textContent = "Connecté en tant que " + user;
+            document.getElementById("logoutBtn").style.display = "block";
+        }
+    }
+
+    function logout() {
+        localStorage.removeItem("user");
+        window.location.reload();
+    }
+
+    checkLoginStatus();
+</script>
 
 
 

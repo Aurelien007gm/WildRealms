@@ -1,0 +1,52 @@
+﻿@page
+@model DashboardModel
+@{
+    ViewData["Title"] = "Dahsboard";
+}
+<p id="status"></p>
+<button id="logoutBtn" style="display:none;" onclick="logout()">Se déconnecter</button>
+<div id="loginForm">
+    <input type="text" id="username" placeholder="Nom d'utilisateur">
+    <input type="password" id="password" placeholder="Mot de passe">
+    <button onclick="login()">Se connecter</button>
+</div>
+
+<h2>Bienvenue sur le Dashboard, @Model.Username !</h2>
+
+<form method="post" asp-page-handler="Create">
+    <button type="submit">Créer une partie</button>
+</form>
+
+<form method="post" asp-page-handler="Join">
+    <input type="number" name="GameId" placeholder="ID de la partie" required />
+    <button type="submit">Rejoindre une partie</button>
+</form>
+
+@if (TempData["Error"] != null)
+{
+    <p style="color:red;">@TempData["Error"]</p>
+}
+
+
+<script>
+    async function checkLoginStatus() {
+        let response = await fetch('/api/check-session');
+        let data = await response.json();
+
+        if (data.loggedIn) {
+            document.getElementById("status").innerText = `Bienvenue, ${data.username}`;
+            document.getElementById("logoutBtn").style.display = "block";
+        } else {
+            document.getElementById("status").innerText = "";
+            document.getElementById("logoutBtn").style.display = "none";
+        }
+    }
+
+    checkLoginStatus();
+
+    function logout() {
+        fetch('/api/logout', { method: 'POST' })
+            .then(() => window.location.reload());
+    }
+</script>
+checkLoginStatus();

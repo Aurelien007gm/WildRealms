@@ -8,6 +8,9 @@ namespace WildRealms.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<GameSession> GameSessions { get; set; }
+        public DbSet<GamePlayer> GamePlayers { get; set; }
+
     }
 }
 

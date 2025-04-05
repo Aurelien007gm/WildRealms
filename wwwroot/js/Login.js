@@ -1,7 +1,6 @@
 ﻿import CryptoJS from 'https://cdn.skypack.dev/crypto-js';
 
 
-
 document.querySelector("form").onsubmit = async function (e) {
     e.preventDefault();  // Empêcher l'envoi du formulaire
 
