@@ -21,6 +21,25 @@ namespace WildRealms.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Game", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("GameSessionId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameSessionId")
+                        .IsUnique();
+
+                    b.ToTable("Games");
+                });
+
             modelBuilder.Entity("GamePlayer", b =>
                 {
                     b.Property<int>("Id")
@@ -30,6 +49,9 @@ namespace WildRealms.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("GameSessionId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("IdInGame")
                         .HasColumnType("integer");
 
                     b.Property<string>("Username")
@@ -51,13 +73,63 @@ namespace WildRealms.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("GameId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("HostUsername")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
                     b.ToTable("GameSessions");
+                });
+
+            modelBuilder.Entity("WildRealms.Models.GameSnapshot", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("GameId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Turn")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameId");
+
+                    b.ToTable("GameSnapshot");
+                });
+
+            modelBuilder.Entity("WildRealms.Models.TerritorySnapshot", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("NumberTroopDeployed")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("OwnerId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SnapshotId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("TerritoryId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SnapshotId");
+
+                    b.ToTable("TerritorySnapshot");
                 });
 
             modelBuilder.Entity("WildRealms.Models.User", b =>
@@ -81,6 +153,17 @@ namespace WildRealms.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Game", b =>
+                {
+                    b.HasOne("GameSession", "GameSession")
+                        .WithOne("Game")
+                        .HasForeignKey("Game", "GameSessionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GameSession");
+                });
+
             modelBuilder.Entity("GamePlayer", b =>
                 {
                     b.HasOne("GameSession", "GameSession")
@@ -92,9 +175,43 @@ namespace WildRealms.Migrations
                     b.Navigation("GameSession");
                 });
 
+            modelBuilder.Entity("WildRealms.Models.GameSnapshot", b =>
+                {
+                    b.HasOne("Game", "Game")
+                        .WithMany("GameSnapshots")
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Game");
+                });
+
+            modelBuilder.Entity("WildRealms.Models.TerritorySnapshot", b =>
+                {
+                    b.HasOne("WildRealms.Models.GameSnapshot", "Snapshot")
+                        .WithMany("TerritorySnapshots")
+                        .HasForeignKey("SnapshotId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Snapshot");
+                });
+
+            modelBuilder.Entity("Game", b =>
+                {
+                    b.Navigation("GameSnapshots");
+                });
+
             modelBuilder.Entity("GameSession", b =>
                 {
+                    b.Navigation("Game");
+
                     b.Navigation("Players");
+                });
+
+            modelBuilder.Entity("WildRealms.Models.GameSnapshot", b =>
+                {
+                    b.Navigation("TerritorySnapshots");
                 });
 #pragma warning restore 612, 618
         }

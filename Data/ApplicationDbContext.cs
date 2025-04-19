@@ -11,6 +11,22 @@ namespace WildRealms.Data
         public DbSet<GameSession> GameSessions { get; set; }
         public DbSet<GamePlayer> GamePlayers { get; set; }
 
+        public DbSet<Game> Games { get; set; }
+
+        public DbSet<GameSnapshot> GameSnapshot { get; set; }
+
+        public DbSet<TerritorySnapshot> TerritorySnapshot { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Game>()
+                .HasOne(g => g.GameSession)
+                .WithOne(gs => gs.Game)
+                .HasForeignKey<Game>(g => g.GameSessionId);
+        }
+
     }
 }
 

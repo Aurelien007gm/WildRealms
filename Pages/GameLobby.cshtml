@@ -4,9 +4,156 @@
 }
 <h2>Lobby de la partie @Model.GameId</h2>
 
-<ul>
+@*@<ul>
     @foreach (var player in Model.Players)
     {
             <li>@player.Username</li>
     }
-</ul>
+</ul>*@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Jeu de Territoires</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-container {
+            flex: 1;
+            display: flex;
+            flex-direction: row;
+        }
+
+        .carte {
+            flex: 3;
+            background-color: #eef;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .notifications {
+            flex: 1;
+            background-color: #ddd;
+            padding: 20px;
+            overflow-y: auto;
+            border-left: 2px solid #aaa;
+        }
+
+        .actions {
+            height: 150px;
+            background-color: #ccc;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            border-top: 2px solid #aaa;
+        }
+
+        .actions form {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .actions input, .actions select, .actions button {
+            padding: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <div id="map">
+            <svg id="hex-map" width="100%" height="100%" viewBox="0 0 1200 800">
+                <!-- Généré dynamiquement -->
+                <script>
+                    const svgNS = "http://www.w3.org/2000/svg";
+                    const cols = 9, rows = 5;
+                    const hexRadius = 45;
+                    const hexWidth = Math.sqrt(3) * hexRadius;
+                    const hexHeight = 2 * hexRadius;
+                    const vertDist = 0.75 * hexHeight;
+                    const offsetX = 60, offsetY = 60;
+                    const svg = document.getElementById("hex-map");
+
+                    function createHex(x, y, id) {
+                      const points = [];
+                      for (let i = 0; i < 6; i++) {
+                        const angle = Math.PI / 3 * i;
+                        const px = x + hexRadius * Math.cos(angle);
+                        const py = y + hexRadius * Math.sin(angle);
+                        points.push(`${px},${py}`);
+                      }
+
+                      const poly = document.createElementNS(svgNS, "polygon");
+                      poly.setAttribute("points", points.join(" "));
+                      poly.setAttribute("id", `territory-${id}`);
+                      poly.addEventListener("click", () => {
+                        document.getElementById("log").innerText = `Territoire ${id} sélectionné`;
+                        document.getElementById("selectedTerritory").value = `territory-${id}`;
+                      });
+
+                      poly.addEventListener("mouseenter", () => {
+                        poly.setAttribute("fill", "#bbf");
+                      });
+
+                      poly.addEventListener("mouseleave", () => {
+                        poly.setAttribute("fill", "#aad");
+                      });
+
+                      svg.appendChild(poly);
+                    }
+
+                    let id = 1;
+                    for (let row = 0; row < rows; row++) {
+                      for (let col = 0; col < cols; col++) {
+                        const x = offsetX + col * hexWidth + (row % 2) * (hexWidth / 2);
+                        const y = offsetY + row * vertDist;
+                        if (id <= 45) createHex(x, y, id++);
+                      }
+                    }
+                </script>
+            </svg>
+        </div>
+        <div class="notifications">
+            <h3>Tour précédent</h3>
+            <p>- Le joueur Alice a attaqué Bob (Territoire X -> Y)</p>
+            <p>- Vous avez reçu 10 pièces d’or</p>
+            <p>- Le territoire Z est tombé aux animaux</p>
+            <!-- Plus de notifications ici -->
+        </div>
+    </div>
+
+    <div class="actions">
+        <form>
+            <label for="actionType">Action :</label>
+            <select id="actionType">
+                <option value="deploy">Déployer</option>
+                <option value="attack">Attaquer</option>
+            </select>
+
+            <label for="from">De :</label>
+            <input type="text" id="from" placeholder="Territoire source">
+
+            <label for="to">Vers :</label>
+            <input type="text" id="to" placeholder="Territoire cible">
+
+            <label for="amount">Troupes :</label>
+            <input type="number" id="amount" min="1" value="1">
+
+            <button type="submit">Valider</button>
+        </form>
+    </div>
+
+</body>
+</html>
+
