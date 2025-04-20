@@ -47,7 +47,7 @@ namespace WildRealms.Pages
             _context.GamePlayers.Add(player);
             _context.SaveChanges();
 
-            return RedirectToPage("/GameLobby", new { id = session.Id });
+            return RedirectToPage("/GameLobby", new { GameSessionId = session.Id });
         }
 
         public IActionResult OnPostJoin()
@@ -72,7 +72,7 @@ namespace WildRealms.Pages
                 _context.SaveChanges();
             }
 
-            return RedirectToPage("/GameLobby", new { id = GameId });
+            return RedirectToPage("/GameLobby", new { GameSessionId = GameId });
         }
     }
 }

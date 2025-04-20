@@ -9,18 +9,19 @@ namespace WildRealms.Pages
         private readonly ApplicationDbContext _context;
 
         public List<GamePlayer> Players { get; set; } = new();
-        public int GameId { get; set; }
+        [BindProperty]
+        public int GameSessionId { get; set; }
 
         public GameLobbyModel(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public IActionResult OnGet(int id)
+        public IActionResult OnGet(int gameSessionId)
         {
-            GameId = id;
+            GameSessionId = gameSessionId;
             Players = _context.GamePlayers
-                        .Where(p => p.GameSessionId == id)
+                        .Where(p => p.GameSessionId == gameSessionId)
                         .ToList();
 
             if (!Players.Any())
@@ -29,6 +30,29 @@ namespace WildRealms.Pages
             }
 
             return Page();
+        }
+
+        public IActionResult OnPostValider()
+        {
+            try
+            {
+                Players = _context.GamePlayers
+                        .Where(p => p.GameSessionId == GameSessionId)
+                        .ToList();
+                GameSession session = _context.GameSessions.First(x => x.Id == GameSessionId);
+                session.Players = Players;
+                _context.Update(session);
+                _context.SaveChanges();
+                Game game = new Game(session);
+                _context.Update(game);
+                _context.SaveChanges();
+                return RedirectToPage("/GameBoard", new { id = session.Id });
+            }
+            catch
+            {
+                return Page();
+            }
+            
         }
     }
 

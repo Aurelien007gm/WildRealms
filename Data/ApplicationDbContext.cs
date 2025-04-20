@@ -25,6 +25,12 @@ namespace WildRealms.Data
                 .HasOne(g => g.GameSession)
                 .WithOne(gs => gs.Game)
                 .HasForeignKey<Game>(g => g.GameSessionId);
+
+            modelBuilder.Entity<GameSession>()
+                .HasOne(gs => gs.Game)
+                .WithOne(g=>g.GameSession)
+                .HasForeignKey<GameSession>(gs => gs.GameId)
+                .IsRequired(false);
         }
 
     }

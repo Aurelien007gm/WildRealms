@@ -1,15 +1,15 @@
 ﻿@page
-@model WildRealms.Pages.GameLobbyModel
+@model WildRealms.Pages.GameBoardModel
 @{
     var GameSessionId = Request.Query["GameSessionId"];
 }
 <h2>Lobby de la partie</h2>
- 
+
  <ul>
-     @foreach (var player in Model.Players)
-     {
-             <li>@player.Username</li>
-     }
+    @foreach (var player in Model.Players)
+    {
+                 <li>@player.Username</li>
+    }
  </ul>
 
 <!DOCTYPE html>
@@ -153,13 +153,7 @@
 
             <button type="submit">Valider</button>
         </form>
-
-        <form method="post" asp-page-handler="Valider">
-            <input type="hidden" name="GameSessionId" value="@GameSessionId" />
-            <button type="submit">Valider</button>
-        </form>
     </div>
 
 </body>
 </html>
-
